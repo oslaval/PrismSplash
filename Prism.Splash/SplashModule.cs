@@ -10,6 +10,8 @@ namespace Splash
 {
     public class SplashModule : IModule
     {
+        int Counter;
+
         #region Private Properties
         private IEventAggregator EventAggregator { get; set; }
 
