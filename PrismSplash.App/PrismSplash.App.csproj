@@ -10,4 +10,11 @@
     <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\ModuleA\ModuleA.csproj" />
+    <ProjectReference Include="..\Modules\ModuleB\ModuleB.csproj" />
+    <ProjectReference Include="..\Modules\ModuleC\ModuleC.csproj" />
+    <ProjectReference Include="..\Modules\Splash\Splash.csproj" />
+  </ItemGroup>
+
 </Project>
