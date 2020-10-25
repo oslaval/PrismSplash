@@ -56,7 +56,7 @@ namespace PrismSplash
         private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
         {
             IEventAggregator eventAggregator = Container.Resolve<IEventAggregator>();
-            eventAggregator.GetEvent<MessageUpdateEvent>().Publish(new MessageUpdateEvent { Message = $"{e.ModuleInfo.ModuleName} - {e.ModuleInfo.State}" });
+            eventAggregator.GetEvent<MessageUpdateSplashEvent>().Publish(new MessageUpdateSplashEvent { Message = $"{e.ModuleInfo.ModuleName} - {e.ModuleInfo.State}" });
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

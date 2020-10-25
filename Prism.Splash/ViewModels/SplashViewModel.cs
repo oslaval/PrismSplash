@@ -14,7 +14,7 @@ namespace Splash.ViewModels
         #region ctor
         public SplashViewModel(IEventAggregator eventAggregator)
         {
-            eventAggregator.GetEvent<MessageUpdateEvent>().Subscribe(e => UpdateMessage(e.Message));
+            eventAggregator.GetEvent<MessageUpdateSplashEvent>().Subscribe(e => UpdateMessage(e.Message));
         }
         #endregion
 
