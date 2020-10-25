@@ -37,8 +37,13 @@ namespace Splash
                 Dispatcher.CurrentDispatcher.BeginInvoke(() =>
                 {
                     SplashView splash = containerProvider.Resolve<SplashView>();
-                    EventAggregator.GetEvent<CloseSplashEvent>().Subscribe(
-                        e => splash.Dispatcher.BeginInvoke(splash.Close), ThreadOption.PublisherThread, true);
+
+                    EventAggregator.GetEvent<CloseSplashEvent>().Subscribe(e =>
+                    {
+                        Thread.Sleep(500);
+                        splash.Dispatcher.BeginInvoke(splash.Close);
+
+                    }, ThreadOption.PublisherThread, true);                 
 
                     splash.Show();
 
