@@ -1,39 +1,40 @@
-﻿namespace Splash.Behaviours
+﻿using System.Windows;
+
+namespace Splash.Behaviours
 {
-  using System.Windows;
-
-  public class SplashBehaviour
-  {
-    #region Dependency Properties
-    public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
-      "Enabled", typeof (bool), typeof (SplashBehaviour), new PropertyMetadata(OnEnabledChanged));
-
-    public static bool GetEnabled(DependencyObject obj)
+    public class SplashBehaviour
     {
-      return (bool) obj.GetValue(EnabledProperty);
-    }
+        #region Dependency Properties
+        public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
+          "Enabled", typeof(bool), typeof(SplashBehaviour), new PropertyMetadata(OnEnabledChanged));
 
-    public static void SetEnabled(DependencyObject obj, bool value)
-    {
-      obj.SetValue(EnabledProperty, value);
-    }
-    #endregion
+        public static bool GetEnabled(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnabledProperty);
+        }
 
-    #region Event Handlers
-    private static void OnEnabledChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-    {
-      var splash = obj as Window;
-      if (splash != null && args.NewValue is bool && (bool)args.NewValue)
-      {
-        splash.Closed += (s, e) =>
-                           {
-                             splash.DataContext = null;
-                             splash.Dispatcher.InvokeShutdown();  
-                           };
-        splash.MouseDoubleClick += (s, e) => splash.Close();
-        splash.MouseLeftButtonDown += (s, e) => splash.DragMove();
-      }
+        public static void SetEnabled(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnabledProperty, value);
+        }
+        #endregion
+
+        #region Event Handlers
+        private static void OnEnabledChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            Window splash = obj as Window;
+            if (splash != null && args.NewValue is bool && (bool)args.NewValue)
+            {
+                splash.Closed += (s, e) =>
+                {
+                    splash.DataContext = null;
+                    splash.Dispatcher.InvokeShutdown();
+                };
+
+                splash.MouseDoubleClick += (s, e) => splash.Close();
+                splash.MouseLeftButtonDown += (s, e) => splash.DragMove();
+            }
+        }
+        #endregion
     }
-    #endregion
-  }
 }
