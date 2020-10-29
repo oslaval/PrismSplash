@@ -2,13 +2,13 @@
 using Prism.Modularity;
 using System.Threading;
 
-namespace ModuleA
+namespace ModuleC
 {
-    public class ModuleAModule : IModule
+    public class ModuleC : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

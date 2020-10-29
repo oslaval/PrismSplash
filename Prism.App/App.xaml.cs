@@ -1,8 +1,12 @@
 ﻿using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Splash;
 using Splash.Events;
+using System;
+using System.Globalization;
+using System.Reflection;
 using System.Windows;
 
 namespace PrismSplash
@@ -33,7 +37,7 @@ namespace PrismSplash
             IModuleManager moduleManager = Container.Resolve<IModuleManager>();
             moduleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
 
-            IModule splashModule = Container.Resolve<SplashModule>();
+            IModule splashModule = Container.Resolve<ModuleSplash>();
             splashModule.OnInitialized(Container);
 
             base.InitializeModules();
@@ -62,6 +66,19 @@ namespace PrismSplash
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
+        }
+
+        protected override void ConfigureViewModelLocator()
+        {
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+            {
+                var viewName = viewType.FullName;
+                viewName = viewName.Replace(".Views.", ".ViewModels.");
+                var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+                var suffix = viewName.EndsWith("View") | viewName.EndsWith("Window") ? "Model" : "ViewModel";
+                var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}{1}, {2}", viewName, suffix, viewAssemblyName);
+                return Type.GetType(viewModelName);
+            });
         }
     }
 }

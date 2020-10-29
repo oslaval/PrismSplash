@@ -4,10 +4,10 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>ModuleA</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
-  </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(TargetDir)$(TargetName)*$(TargetExt)&quot; &quot;$(SolutionDir)Prism.App\bin\$(Configuration)\netcoreapp3.1\Modules\&quot; /Y /S" />
   </Target>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+  </ItemGroup>
 </Project>

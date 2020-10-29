@@ -1,15 +1,17 @@
 ﻿<Window
-    x:Class="Splash.Views.SplashView"
+    x:Class="Splash.Views.SplashWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Behaviours="clr-namespace:Splash.Behaviours"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
     Width="540"
     Height="360"
     Behaviours:SplashBehaviour.Enabled="True"
     d:DesignHeight="279"
     d:DesignWidth="450"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     AllowsTransparency="True"
     Background="Transparent"
     Foreground="White"
@@ -61,7 +63,7 @@
             HorizontalAlignment="Center"
             FontSize="30"
             FontWeight="Bold"
-            Text="My Application">
+            Text="{Binding Title}">
             <TextBlock.Effect>
                 <DropShadowEffect Opacity="0.7" ShadowDepth="4" />
             </TextBlock.Effect>

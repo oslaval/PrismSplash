@@ -8,7 +8,7 @@ using System.Windows.Threading;
 
 namespace Splash
 {
-    public class SplashModule : IModule
+    public class ModuleSplash : IModule
     {        
         #region Private Properties
         private IEventAggregator EventAggregator { get; set; }
@@ -16,7 +16,7 @@ namespace Splash
         private AutoResetEvent WaitForCreation { get; set; }
         #endregion
 
-        public SplashModule(IEventAggregator eventAggregator)
+        public ModuleSplash(IEventAggregator eventAggregator)
         {
             EventAggregator = eventAggregator;
         }
@@ -30,18 +30,18 @@ namespace Splash
 
             WaitForCreation = new AutoResetEvent(false);
 
-            ThreadStart showSplash = () =>
+            void showSplash()
             {
                 Dispatcher.CurrentDispatcher.BeginInvoke(() =>
                 {
-                    SplashView splash = containerProvider.Resolve<SplashView>();
+                    SplashWindow splash = containerProvider.Resolve<SplashWindow>();
 
                     EventAggregator.GetEvent<CloseSplashEvent>().Subscribe(e =>
                     {
                         Thread.Sleep(500);
                         splash.Dispatcher.BeginInvoke(splash.Close);
 
-                    }, ThreadOption.PublisherThread, true);                 
+                    }, ThreadOption.PublisherThread, true);
 
                     splash.Show();
 
@@ -49,7 +49,7 @@ namespace Splash
                 });
 
                 Dispatcher.Run();
-            };
+            }
 
             Thread thread = new Thread(showSplash) { Name = "Splash Thread", IsBackground = true };
             thread.SetApartmentState(ApartmentState.STA);

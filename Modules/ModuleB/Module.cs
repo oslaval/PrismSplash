@@ -4,11 +4,11 @@ using System.Threading;
 
 namespace ModuleB
 {
-    public class ModuleBModule : IModule
+    public class ModuleB : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
