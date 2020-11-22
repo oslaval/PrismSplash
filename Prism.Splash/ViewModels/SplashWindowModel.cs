@@ -2,7 +2,6 @@
 using Prism.Mvvm;
 using Splash.Events;
 using System;
-using System.Reflection;
 using System.Windows;
 
 namespace Splash.ViewModels
