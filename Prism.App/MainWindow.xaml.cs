@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PrismSplash
+namespace PrismApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

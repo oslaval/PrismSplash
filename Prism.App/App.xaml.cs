@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Windows;
 
-namespace PrismSplash
+namespace PrismApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -70,6 +70,8 @@ namespace PrismSplash
 
         protected override void ConfigureViewModelLocator()
         {
+            base.ConfigureViewModelLocator();
+
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
                 var viewName = viewType.FullName;
